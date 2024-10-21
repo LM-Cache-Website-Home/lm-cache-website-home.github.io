@@ -3036,7 +3036,7 @@ html {
     margin-bottom: 412px;
     display: flex;
     position: relative;
-    padding-bottom: 900px;
+    padding-bottom: 750px;
   }
   
   .home-bg-image {
@@ -6030,6 +6030,25 @@ html {
     .log-in {
       margin-bottom: 20px;
     }
+
+    .home-hero-table {
+      grid-template-columns: 1fr;
+    }
+    .home-hero-heading h1 {
+      font-size: 2rem;
+    }
+    .button-content a {
+      width: 100%;
+    }
+
+    .home-hero {
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 412px;
+      display: flex;
+      position: relative;
+      padding-bottom: 1100px;
+    }
   
     .nav-link {
       margin-bottom: 10px;
@@ -6543,6 +6562,15 @@ html {
   }
   
   @media screen and (max-width: 479px) {
+    .home-hero {
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 412px;
+      display: flex;
+      position: relative;
+      padding-bottom: 1150px;
+    }
+
     h2 {
       font-size: 26px;
     }
