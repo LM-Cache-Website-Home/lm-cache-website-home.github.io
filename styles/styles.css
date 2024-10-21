@@ -3051,13 +3051,14 @@ html {
   .home-hero-containerr {
     flex-direction: column;
     align-items: center;
-    margin-left: 40px;
-    margin-right: 40px;
+    /* margin-left: 40px;
+    margin-right: 40px; */
     padding-top: 88px;
     display: flex;
     position: absolute;
     inset: 0%;
     max-width: 1500px;
+    margin: 0 auto;
   }
   
   .home-hero-description {
@@ -5677,6 +5678,9 @@ html {
   
     .home-hero-containerr {
       padding-top: 60px;
+      max-width: 1200px; /* You can adjust this width */
+      margin: 0 auto; /* Centers the content */
+      padding: 0 20px; /* Adds padding for smaller screens */
     }
   
     .companies-section {
@@ -6187,8 +6191,9 @@ html {
     }
   
     .home-hero-containerr {
-      margin-left: 20px;
-      margin-right: 20px;
+      max-width: 1200px; /* You can adjust this width */
+      margin: 0 auto; /* Centers the content */
+      padding: 0 20px; /* Adds padding for smaller screens */
     }
   
     .companies-section {
@@ -6755,8 +6760,9 @@ html {
     }
   
     .home-hero-containerr, .companies-section-container {
-      margin-left: 10px;
-      margin-right: 10px;
+      max-width: 1200px; /* You can adjust this width */
+    margin: 0 auto; /* Centers the content */
+    padding: 0 20px; /* Adds padding for smaller screens */
     }
   
     .body-43 {
