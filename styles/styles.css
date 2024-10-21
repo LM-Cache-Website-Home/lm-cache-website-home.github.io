@@ -788,6 +788,15 @@ html {
   }
   
   @media screen and (max-width: 991px) {
+    .home-hero {
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 412px;
+      display: flex;
+      position: relative;
+      padding-bottom: 1000px;
+    }
+
     .w-container {
       max-width: 728px;
     }
