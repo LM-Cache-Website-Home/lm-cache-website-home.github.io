@@ -3057,7 +3057,7 @@ html {
     display: flex;
     position: absolute;
     inset: 0%;
-    max-width: 1500px;
+    /*max-width: 1500px;*/
   }
   
   .home-hero-description {
