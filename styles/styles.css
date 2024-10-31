@@ -3311,6 +3311,134 @@ html {
     display: flex;
     inset: -128px 0% auto auto;
   }
+
+  /* Contact Section Styles */
+.contact-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 20px;
+}
+
+.contact-container {
+  max-width: 600px;
+  width: 100%;
+}
+
+.contact-container h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.contact-container p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.email-address a {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.email-address:hover {
+  text-decoration: underline;
+}
+
+
+  .paper-preview a img {
+    opacity: 1; /* Default opacity */
+  }
+
+  /* CSS for adjusting title spacing */
+.research-title {
+  font-size: 1.5em; /* Adjust as needed */
+  line-height: 1.2; /* Reduces the space between lines */
+  margin-bottom: 5px; /* Adjust this value to reduce space below the title */
+}
+
+  .paper-preview a:hover img {
+    opacity: 0.3; /* Set opacity to 0.8 when hovering */
+  }
+
+  .research-papers {
+    padding: 40px;
+    text-align: left;
+    margin: 0 auto;
+    margin-bottom: -50px;
+  }
+
+  .research-papers h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: left; /* Ensures text is aligned to the left */
+    display: block;   /* Ensures the heading takes up the full width */
+    width: 100%;      /* Sets the heading width to 100% of its container */
+    margin-left: 0;
+  }
+  
+  .research-papers-container {
+    max-width: 1200px;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  }
+  
+  .paper {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  
+  .paper-content-1 {
+    flex: 1;
+    padding-right: 20px;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+
+  .paper-content-2 {
+    flex: 1;
+    padding-right: 20px;
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .paper-content h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .paper-content p {
+    margin: 10px 0;
+  }
+  
+  .publication-date {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 0.85rem;
+    color: gray;
+  }
+  
+  .paper-preview {
+    width: 35%;
+    text-align: left;
+  }
+  
+  .paper-preview img {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  
   
   .growth {
     display: flex;
