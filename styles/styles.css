@@ -2269,6 +2269,7 @@ html {
     align-items: center;
     display: flex;
     width: 100%;
+    padding-right: 20px;
   }
   
   .dropdown-link-box-2 {
@@ -3445,6 +3446,7 @@ html {
     justify-content: center;
     width: 100%; /* Ensure the section takes full page width */
     margin-top: -350px;
+    padding-top: 75px;
   }
   
   .growth-container {
@@ -5655,10 +5657,88 @@ html {
       height: auto;
     }
   }
+
+  /* Hamburger icon styling */
+.hamburger {
+  width: 30px;
+  height: 20px;
+  display: none; /* Hide by default, we'll show it on smaller screens */
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: #333;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Toggle the icon to an X */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Dropdown menu styling */
+.menu {
+  display: none;
+  flex-direction: column;
+  background-color: #333;
+  position: absolute;
+  top: 60px; /* Adjust based on navbar height */
+  right: 10px;
+  padding: 10px;
+  z-index: 10;
+}
+
+.menu.show {
+  display: flex;
+}
+
+.menu a {
+  color: #fff;
+  padding: 10px;
+  text-decoration: none;
+  display: block;
+}
+
+.menu a:hover {
+  background-color: #444;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+  .nav-menu-wrapper {
+    display: none; /* Hide regular navbar links on mobile */
+  }
+
+  .hamburger {
+    display: flex; /* Show the hamburger icon on smaller screens */
+  }
+
+  .navbar-wrapper {
+    padding-right: 10px;
+  }
+}
   
   @media screen and (max-width: 991px) {
     .menu-button {
       padding: 12px;
+    }
+
+    .home-hero-heading {
+      padding-top: 50px;
     }
   
     .menu-button.w--open {

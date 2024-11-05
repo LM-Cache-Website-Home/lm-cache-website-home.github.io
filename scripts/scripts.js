@@ -1,3 +1,8 @@
+function toggleMenu() {
+    document.querySelector('.hamburger').classList.toggle('active');
+    document.querySelector('.menu').classList.toggle('show');
+  }  
+
 // Hamburger Menu Toggle
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.querySelector('nav ul');
