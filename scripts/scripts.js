@@ -1,6 +1,7 @@
 function toggleMenu() {
     document.querySelector('.hamburger').classList.toggle('active');
     document.querySelector('.menu').classList.toggle('show');
+    document.querySelector('.menu-overlay').classList.toggle('show');
   }  
 
 // Hamburger Menu Toggle
