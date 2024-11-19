@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KV Cache Size Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+        }
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>KV Cache Size Calculator</h1>
+        <label for="model">Select LLM Model:</label>
+        <select id="model">
+            <option value="meta-llama/Llama-3.1-8B-Instruct">Llama-3.1-8B-Instruct</option>
+            <option value="mistralai/Mistral-7B-Instruct-v0.2">Mistral-7B-Instruct-v0.2</option>
+            <option value="Qwen/Qwen-7B">Qwen-7B</option>
+            <option value="lmsys/longchat-7b-16k">longchat-7b-16k</option>
+        </select>
+        <label for="dtype">Select dtype:</label>
+        <select id="dtype">
+            <option value="float16">float16</option>
+            <option value="bfloat16">bfloat16</option>
+            <option value="float32">float32</option>
+            <option value="int8">int8</option>
+        </select>
+        <label for="tokens">Enter Number of Tokens:</label>
+        <input type="number" id="tokens" placeholder="Enter number of tokens">
+        <button onclick="calculateKVCache()">Get KV Cache Size</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function calculateKVCache() {
+            const model = document.getElementById('model').value;
+            const tokens = parseInt(document.getElementById('tokens').value);
+            const dtype = document.getElementById('dtype').value;
+
+            if (isNaN(tokens) || tokens <= 0) {
+                document.getElementById('result').textContent = "Please enter a valid number of tokens.";
+                return;
+            }
+
+            // Model configurations
+            let hidden_size, num_attention_heads, num_hidden_layers, num_key_value_heads;
+
+            if (model === 'meta-llama/Llama-3.1-8B-Instruct') {
+                hidden_size = 4096;
+                num_attention_heads = 32;
+                num_hidden_layers = 32;
+                num_key_value_heads = 8;
+            } else if (model === 'mistralai/Mistral-7B-Instruct-v0.2') {
+                // Placeholder configs
+                hidden_size = 4096;
+                num_attention_heads = 32;
+                num_hidden_layers = 32;
+                num_key_value_heads = 8;
+            } else if (model === 'Qwen/Qwen-7B') {
+                // Placeholder configs
+                hidden_size = 4096;
+                num_attention_heads = 32;
+                num_hidden_layers = 32;
+                num_key_value_heads = 32;
+            } else if (model === 'lmsys/longchat-7b-16k') {
+                hidden_size = 4096;
+                num_attention_heads = 32;
+                num_hidden_layers = 32;
+                num_key_value_heads = 32;
+            }
+            
+            else {
+                document.getElementById('result').textContent = "Model not recognized.";
+                return;
+            }
+
+            // Calculate head_size
+            const head_size = hidden_size / num_attention_heads;
+
+            // Determine dtype size in bytes
+            let dtype_size;
+            if (dtype === 'float32') {
+                dtype_size = 4;
+            } else if (dtype === 'float16' || dtype === 'bfloat16') {
+                dtype_size = 2;
+            } else if (dtype === 'int8') {
+                dtype_size = 1;
+            } else {
+                document.getElementById('result').textContent = "Invalid data type selected.";
+                return;
+            }
+
+            // Calculate KV cache size
+            const total_elements = 2 * num_hidden_layers * tokens * num_key_value_heads * head_size;
+            const total_bytes = total_elements * dtype_size;
+            const kvCacheSizeGB = total_bytes / (1024 ** 3); // Convert bytes to GB
+            
+            document.getElementById('result').innerHTML =
+            `KV Cache Size: ${kvCacheSizeGB.toFixed(4)} GB`;
+            // document.getElementById('result').innerHTML = 
+            //`Model: ${model}<br>KV Cache Size: ${kvCacheSizeGB.toFixed(4)} GB<br>KV Cache Shape: [2, ${num_hidden_layers}, ${tokens}, ${num_key_value_heads}, ${head_size}]`;
+        }
+        // Add Enter key event listener
+        document.getElementById('tokens').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                calculateKVCache();
+            }
+        });
+    </script>
+</body>
+</html>
