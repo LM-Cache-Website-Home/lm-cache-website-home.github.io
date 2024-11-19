@@ -5,24 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KV Cache Size Calculator</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
         .container {
+            font-family: Arial, sans-serif;
             max-width: 400px;
-            margin: auto;
-            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
         }
-        select, input, button {
+
+        label, select, input, button {
+            display: block;
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
+            margin-bottom: 15px;
         }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        select, input, button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3898ec;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
         #result {
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
         }
     </style>
