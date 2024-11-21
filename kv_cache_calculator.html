@@ -49,6 +49,13 @@
             font-size: 16px;
             font-weight: bold;
         }
+
+        /* New CSS for calculation steps */
+        #calculation-steps {
+            font-size: 12px;
+            margin-top: 10px;
+            color: #555;
+        }
     </style>
 </head>
 <body>
@@ -57,11 +64,12 @@
         <label for="model">Select LLM Model:</label>
         <select id="model">
             <option value="meta-llama/Llama-3.1-8B-Instruct">Llama-3.1-8B-Instruct</option>
+            <option value="meta-llama/Llama-3.1-70B-Instruct">Llama-3.1-70B-Instruct</option>
             <option value="mistralai/Mistral-7B-Instruct-v0.2">Mistral-7B-Instruct-v0.2</option>
             <option value="Qwen/Qwen-7B">Qwen-7B</option>
             <option value="lmsys/longchat-7b-16k">longchat-7b-16k</option>
         </select>
-        <label for="dtype">Select dtype:</label>
+        <label for="dtype">Select data type:</label>
         <select id="dtype">
             <option value="float16">float16</option>
             <option value="bfloat16">bfloat16</option>
@@ -72,6 +80,8 @@
         <input type="number" id="tokens" placeholder="Enter number of tokens">
         <button onclick="calculateKVCache()">Get KV Cache Size</button>
         <div id="result"></div>
+        <!-- New div for calculation steps -->
+        <div id="calculation-steps"></div>
     </div>
     <script>
         function calculateKVCache() {
@@ -81,6 +91,7 @@
 
             if (isNaN(tokens) || tokens <= 0) {
                 document.getElementById('result').textContent = "Please enter a valid number of tokens.";
+                document.getElementById('calculation-steps').innerHTML = "";
                 return;
             }
 
@@ -91,6 +102,11 @@
                 hidden_size = 4096;
                 num_attention_heads = 32;
                 num_hidden_layers = 32;
+                num_key_value_heads = 8;
+            } else if (model === 'meta-llama/Llama-3.1-70B-Instruct') {
+                hidden_size = 8192;
+                num_attention_heads = 64;
+                num_hidden_layers = 80;
                 num_key_value_heads = 8;
             } else if (model === 'mistralai/Mistral-7B-Instruct-v0.2') {
                 // Placeholder configs
@@ -113,6 +129,7 @@
             
             else {
                 document.getElementById('result').textContent = "Model not recognized.";
+                document.getElementById('calculation-steps').innerHTML = "";
                 return;
             }
 
@@ -129,6 +146,7 @@
                 dtype_size = 1;
             } else {
                 document.getElementById('result').textContent = "Invalid data type selected.";
+                document.getElementById('calculation-steps').innerHTML = "";
                 return;
             }
 
@@ -141,6 +159,23 @@
             `KV Cache Size: ${kvCacheSizeGB.toFixed(4)} GB`;
             // document.getElementById('result').innerHTML = 
             //`Model: ${model}<br>KV Cache Size: ${kvCacheSizeGB.toFixed(4)} GB<br>KV Cache Shape: [2, ${num_hidden_layers}, ${tokens}, ${num_key_value_heads}, ${head_size}]`;
+
+            // Prepare calculation steps
+            let steps = `
+                <strong>Calculation Details:</strong><br><br>
+                <b>Selected Model:</b> ${model}<br>
+                <b>Hidden Size:</b> ${hidden_size}<br>
+                <b>Number of Attention Heads:</b> ${num_attention_heads}<br>
+                <b>Number of Hidden Layers:</b> ${num_hidden_layers}<br>
+                <b>Number of Key-Value Heads:</b> ${num_key_value_heads}<br>
+                <b>Head Size:</b> ${head_size} (Hidden Size / Attention Heads)<br>
+                <b>Data Type Size:</b> ${dtype_size} bytes<br>
+                <b>Total Elements:</b> 2 × ${num_hidden_layers} × ${tokens} × ${num_key_value_heads} × ${head_size} = ${total_elements}<br>
+                <b>Total Bytes:</b> ${total_elements} × ${dtype_size} = ${total_bytes} bytes<br>
+                <b>KV Cache Size:</b> ${total_bytes} / (1024³) ≈ ${kvCacheSizeGB.toFixed(4)} GB
+            `;
+            // Display calculation steps
+            document.getElementById('calculation-steps').innerHTML = steps;
         }
         // Add Enter key event listener
         document.getElementById('tokens').addEventListener('keydown', function(event) {
